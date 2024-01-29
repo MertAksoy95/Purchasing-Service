@@ -1,0 +1,56 @@
+# Default
+server:
+  port: 9100
+  tomcat:
+    accept-count: 500
+  servlet:
+    context-path: /purchasing
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: purchasing
+  datasource:
+    url: jdbc:mysql://localhost/purchasing?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Istanbul
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: Europe/Istanbul
+
+springdoc:
+  packagesToScan: com.emlakjet.purchasing
+
+purchase-limit: 200
+jwt:
+  secretKey: K5H8Nq1vPrtk8h62zs207MKUy5xzHNuSRtmhGmAGL42CapP9a
+  session-expiration-time: 18000000  # 30 Minutes
+
+hazelcast:
+  map:
+    time-to-live-minutes: 30
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: preprod
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod

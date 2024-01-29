@@ -1,0 +1,18 @@
+<hazelcast xmlns="http://www.hazelcast.com/schema/config">
+    <network>
+        <join>
+            <multicast enabled="false"/>
+            <tcp-ip enabled="true">
+                <interface>127.0.0.1</interface>
+            </tcp-ip>
+        </join>
+    </network>
+
+    <map name="default">
+        <time-to-live-seconds>1800</time-to-live-seconds>   <!--30 Minutes-->
+        <max-idle-seconds>1800</max-idle-seconds>           <!--30 Minutes-->
+        <eviction eviction-policy="LRU"
+                  max-size-policy="PER_NODE"
+                  size="100000"/>
+    </map>
+</hazelcast>
